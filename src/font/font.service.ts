@@ -2,6 +2,7 @@ import { HttpService } from '@nestjs/axios/dist';
 import { Injectable, Logger } from '@nestjs/common';
 import { AxiosError } from 'axios';
 import { catchError, firstValueFrom } from 'rxjs';
+import { CSSFontFace } from './models/CSSFontFace';
 import { GoogleFontList } from './models/GoogleFontList';
 import { cssParser } from './utils/cssParser';
 
@@ -31,9 +32,9 @@ export class FontService {
     return data;
   }
 
-  async getFont(family: string): Promise<any> {
+  async getFont(family: string): Promise<CSSFontFace[]> {
     // https://developers.google.com/fonts/docs/css2
-    const URL = `https://fonts.googleapis.com/css2?family=${family}&family=Montserrat:wght@400;700&text=Hello`;
+    const URL = `https://fonts.googleapis.com/css2?family=${family}`;
     const { data } = await firstValueFrom(
       this.httpService
         .get<string>(URL, {

@@ -22,7 +22,9 @@ export function cssParser(css: string): CSSFontFace[] {
       // split the key value sting into it's values
       const keyValueProp = fontProp.trim().split(': ');
       const key = keyValueProp[0];
-      const value = keyValueProp[1];
+      // remove single quotes from font family value
+      const value = keyValueProp[1].replace("'", '').replace("'", '');
+
       if (key === 'src') {
         const src = value.split(' ');
         const srcValue = {

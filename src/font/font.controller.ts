@@ -1,5 +1,6 @@
 import { Controller, Get, Query } from '@nestjs/common';
 import { FontService } from './font.service';
+import { CSSFontFace } from './models/CSSFontFace';
 import { GoogleFontList } from './models/GoogleFontList';
 
 @Controller()
@@ -7,7 +8,9 @@ export class FontController {
   constructor(private readonly fontService: FontService) {}
 
   @Get('font')
-  async getFont(@Query('family') family: string | string[]) {
+  async getFont(
+    @Query('family') family: string | string[],
+  ): Promise<CSSFontFace[] | string> {
     let font = '';
     if (Array.isArray(family)) {
       font = family.join('&family=');
